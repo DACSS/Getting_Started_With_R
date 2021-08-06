@@ -1,0 +1,127 @@
+---
+title: 'Introduction to data'
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(here)
+library(knitr)
+opts_chunk$set(echo = TRUE)
+tutorial_options(exercise.timelimit = 10)
+```
+
+```{r echo=F, message=F} 
+# actual data read-in. Not showing in tutorial because don't want to confuse them with file path
+survey_data <- read_csv(here('Intro_to_data','data_prep','survey_data.csv'))
+```
+
+## **Introduction**
+  
+In this tutorial, we will go over what data is and how we can use R to work with it.
+  
+## **What is data?**
+  
+You've probably heard the term data a lot. Data is everywhere, now more than ever. But what really is it? 
+  
+**Data is information collected about people, things, events, places, etc...**
+For present purposes, we will restrict our discussion to data collected from people. 
+  
+We collect data from people because we are interested in measuring things about them. When we measure something, we assign a value to it in an attempt to get information out of it. For example, we conduct a survey and ask respondents for their age. Each individual age we collect is a **measurement**. We collect this data because we are interested in learning about our survey respondents. Age is just one of the characteristics we are interested in. In our case, each person in the survey is a **unit of observation**, the individual entity we are interested in measuring.
+  
+Age is an example of a **variable**. A variable is something that can take on different values for different units of observation (in our case, people). Age is one example of a variable, because it can take on different values for different units of observation (i.e., different people will have different ages). 
+  
+When we collect data, we typically take a **sample** from a **population**. The population is the *entire* group of people we are interested in learning about (e.g., all eligible voters in the U.S.), while our sample is the small subset of people we measure within that group (e.g., the people who survey). Ideally, our sample is *random*, meaning that everyone in the population is equally likely to be in our sample (though this is often not feasible).
+  
+In any given dataset, we are likely to have multiple variables. To further understand this, let's get into an example.
+  
+## An Example Dataset
+  
+### An Example  
+  
+Let's try and make our discussion about data a little more concrete. Say we conduct a small political survey, to only 5 people. We ask each person for their **age**, their **political party affiliation** (i.e., Republican, Democrat, or Independent), the **state** they live in, and the **distance from their home to the nearest polling location**. Note that this dataset is completely hypothetical (it's made-up), but it's great for a helpful demonstration.
+  
+### Reading in data
+  
+Before we start working with data, we need to *read in* our dataset. At this point, if you have not yet viewed the **Reading in data with R** slides, you should stop, go through those slides, and come back to the tutorial. <!--Insert link to slides when it exists-->
+
+Our data are stored in a file called 'survey_data.csv'. We can use the `read_csv()` command from the `readr` package to read this dataset into `R`. 
+   
+<!--Note that below is not the actual data reading in. Just making it seem that way to students--> 
+```{r eval=FALSE}
+survey_data <- read_csv('survey_data.csv')
+```
+```{r}
+survey_data
+```
+  
+We stored our dataset in an `R` object (a dataframe, to be specific) called `survey_data`. Here, we have **tabular** data - data made up of rows and columns. We have 5 rows, and each of these rows is an individual who responded to our hypothetical survey. There are 4 variables in our dataset: `age`, `political_party`, `state`, and `distance_from_polls`. Our data here is **tidy** - meaning that each row is an observation (here, a single survey respondent) and each column is a variable. 
+<!--should we discuss long and wide data?--> 
+  
+We are first going to discuss `age` and `distance_from_polls` - both of which are examples of **numerical variables*8, which you will learn about in the next section.
+  
+## Numerical data  
+  
+A  **numerical variable** is a variable where our measurements are represented as quantities. Higher values of a numerical variable indicate greater quantities of variable being measured.  
+`age` is a great example of a numerical variable. Higher values of `age` indicate greater quantities of age (i.e., an older individual). We might summarize this variable by taking a mean (i.e., average) value. That is, we could compute the mean and find out that there the average age of our survey participants was `r round(mean(survey_data$age))`. 
+  
+Age is also an example of a **discrete numerical variable** - one with no values in between two measurements. That is to say, people don't typically list their age as 25.57. Instead, they list it as a whole number. Discrete variables don't have decimal points. Number of children is another example of a discrete variable. A household might have 1 or 2 children, but it will never have 1.5 children.
+  
+`distance_from_polls` (the respondent's distance between their house and their nearest polling location, measured in miles) is also a numerical variable, but is more specifically a **continuous numerical variable**. By this we mean that between any two values, there are infinitely many more values. For example, someone can live 4.01 miles from a location, or 4.001 miles, or 4.0001 miles...and so on.
+  
+### Numerical Data - Ordinal vs. Interval vs. Ratio
+  
+Researchers commonly make a distinction between **interval** data, which lacks a true zero, and **ratio** data, which does have a true zero. When data are measured on a ratio scale, a value of 0 indicates a **true absence** of the quantity being measured. Interval and ratio data can both be either continuous or discrete.
+  
+Income is an example of ratio data, as it is possible to earn $0 in a fiscal year. This is not true for interval data. For example, a temperature of 0 degrees Fahrenheit does not indicate the absence of temperature - its position is arbitrary. Therefore, temperature is measured on an interval scale.
+  
+There's one more type of numerical data to discuss: **ordinal data**. While ordinal, interval, and ratio data are all rank-ordered (i.e., higher values indicate higher amounts of the quantity being measured), ordinal data **does not assume equal distance between values**. Ordinal data also has no true zero. Furthermore, ordinal data is always discrete.
+  
+For example, you've probably filled out a survey where you were asked to rate your satisfaction with a product on a scale from 1-10. While a response of 5 indicates greater satisfaction than a response of 4, there is no way to know if the the difference between 5 and 4 is the same as the difference between 4 and 3. These are convenient values that attempt measure satisfaction approximately but are in no way as precise as measuring temperature with a thermometer. Importantly, there's no way to know that all processes that generated the observations (e.g., people filing out forms) understand those numbers to mean the same thing.
+  
+**Numerical data - A summary table**
+  
+Below is a table summarizing the difference between ordinal, interval, and ratio data.  
+```{r echo=F}
+num_data_table <- matrix(c("X","","","Discrete", "X","X","","Either", "X","X","X","Either"), nrow=3,ncol=4,byrow = T) 
+colnames(num_data_table) <- c("Rank ordered", "Equal distance between values", "No true zero","Continuous/Discrete?")
+rownames(num_data_table) <- c("Ordinal","Interval","Ratio")
+knitr::kable(num_data_table,align="c")
+```
+
+## Categorical data
+  
+Let's go back to our political survey data.
+  
+```{r echo=FALSE}
+survey_data
+```
+  
+We have already established that `age` and `distance_from_polls` are numerical variables. However, `political_party` and `state` are a different kind of variable. Specifically, these are **categorical variables**. Here, each individual does not have greater or lesser quantities of the variable. Rather, the values indicate qualitative information (e.g., which state the individual is from). It would not make sense to measure the "average" `political_party` value.
+  
+What we can do, using `R`, is count the frequency which which each value occurs, using the `table()` function. Here, we have a dataframe (similar to an Excel spreadsheet), called `survey_data`. If we want to count the frequencies of `political_party`, we simply run the code `table(survey_data$political_party)`. (if this is confusing, don't worry - you'll learn plenty more about this in subsequent tutorials).
+  
+```{r}
+table(survey_data$political_party)
+```
+  
+Our frequency table gives us important information summarizing our data. It tells us that, among the people we surveyed, there were 2 Democrats, 1 Independent, and 2 Republicans. 
+  
+We can also compute a frequency table for our `state` variable:
+  
+```{r}
+table(survey_data$state)
+```
+  
+This is less useful to us, as there are five participants, each living in a unique state. Likely we would *collapse* across the variable `state` in our data analysis - in other words, we will ignore which state people are in and focus on other variables.
+  
+In reality, our **sample size** (the number of individuals in our data)
+  
+## **Conclusion**
+  
+Now, you have learned the basics of what data is, as well as the difference between numerical and categorical data. 
+  
+  
+

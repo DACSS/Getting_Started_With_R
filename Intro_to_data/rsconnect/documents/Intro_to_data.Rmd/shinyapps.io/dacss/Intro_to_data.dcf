@@ -1,0 +1,13 @@
+name: Intro_to_data
+title: Intro_to_data
+username:
+account: dacss
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4437314
+bundleId: 4869360
+url: https://dacss.shinyapps.io/Intro_to_data/
+when: 1627581608.05876
+lastSyncTime: 1627581608.05877
+asMultiple: FALSE
+asStatic: FALSE
