@@ -1,0 +1,58 @@
+---
+title: "Basic R Programming"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(learnr)
+library(tidyverse)
+library(here)
+library(knitr)
+opts_chunk$set(echo = TRUE)
+tutorial_options(exercise.timelimit = 10)
+```
+
+```{r echo=F, message=F} 
+# actual data read-in. Not showing in tutorial because don't want to confuse them with file path
+survey_data_2 <- read_csv(here('Basic_R_Programming','data','survey_data_2.csv'))
+```
+
+## **Introduction**
+  
+In this tutorial, we will go over the basics of programming with `R` and how we can use `R` to work with data.
+  
+## `R` as a calculator
+  
+At its most basic level, `R` can be used to perform calculations just like your regular handheld calculator. Any arithmetic/mathematical operation can be done in `R`. 
+  
+```{r}
+2+2
+5-1
+4*4
+10/5
+```
+  
+### Exercise - Use `R` as a calculator
+  
+Try out using `R` as a calculator! 
+  
+**OPTIONAL** - ADVANCED EXERCISE: Use `R` as a calculator and compute the number of minutes in a year.
+  
+```{r calculator, exercise=TRUE, exercise.lines=10}
+
+```
+  
+```{r calculator-solution}
+# any arithmetic will do
+5+3
+8-1
+7*2
+24/3
+# OPTIONAL ADVANCED ANSWER
+365*60*24
+```
+
+## Basic `R` Syntax 
+  
+Now that we know a little bit
