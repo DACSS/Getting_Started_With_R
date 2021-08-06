@@ -4,7 +4,7 @@ output: learnr::tutorial
 runtime: shiny_prerendered
 ---
 
-```{r setup, include=FALSE}
+```{r setup}
 library(learnr)
 library(tidyverse)
 library(here)
@@ -15,7 +15,7 @@ tutorial_options(exercise.timelimit = 10)
 
 ```{r echo=F, message=F} 
 # actual data read-in. Not showing in tutorial because don't want to confuse them with file path
-survey_data <- read_csv(here('Intro_to_data','data_prep','survey_data.csv'))
+survey_data <- read_csv(here('Intro_to_data','data','survey_data.csv'))
 ```
 
 ## **Introduction**

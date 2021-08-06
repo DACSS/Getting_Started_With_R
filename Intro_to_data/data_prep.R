@@ -18,4 +18,4 @@ survey_data <- tribble(
 )
 
 # write to file
-#write_csv(survey_data, file=here('Intro_to_data','data_prep','survey_data.csv'))  
+#write_csv(survey_data, file=here('Intro_to_data','data','survey_data.csv'))  
