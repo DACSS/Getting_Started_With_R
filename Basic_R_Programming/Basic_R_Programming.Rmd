@@ -55,4 +55,32 @@ Try out using `R` as a calculator!
 
 ## Basic `R` Syntax 
   
-Now that we know a little bit
+Now that we know a little bit about using `R` as a calculator, let's get into basic `R` syntax. 
+  
+`R` works by creating objects - pieces of data stored in the *environment*. We can create an object `x` that contains a single piece of data - the number `5`.
+  
+```{r}
+x <- 5
+```
+  
+When we type the object, `x`, and run it, `R` will print out the contents.
+```{r}
+x
+```
+  
+`x` is an example of a **vector**, an object containing values of a single **type**. Here, the type is **numeric**, because 5 is a number. Furthermore, `x` contains only one value. However, we can use the `c()` command to create a vector containing multiple values. All we have to do is use `c()` and separate the values with a comma. Here's an example:
+  
+```{r}
+vector_1 <- c(1,2,3,4,5)
+vector_1
+```
+  
+Again, when we type the object name, `R` will print its contents.  
+  
+We can perform arithmetic operations on this vector, as well.
+
+```{r}
+vector_1 + 1
+```
+  
+Because `R` is **vectorized**, this operation was performed on *each element* of `vector_1`. That means that we add 1 to the first value in `vector_1`, `1`, and then do so for the second value, `2`, and so on. 
