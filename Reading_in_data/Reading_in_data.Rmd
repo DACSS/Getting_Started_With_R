@@ -108,7 +108,7 @@ student_data
 ## A bit more about `read_csv()`
 - `read_csv()` is smart. By default, it assumes that the first row of the file contains our column names, so it automatically names our columns based on that row.
 - If by chance the data file does not have column names, you will need to specify `col_names=FALSE` when you run the code. Otherwise, `read_csv()` will name the columns based on the first row of data.
-- You can also use the `col_names` argument to provide a character vector of names to give the columns of data (e.g., `col_names=c("col1, col2)`).
+- You can also use the `col_names` argument to provide a character vector of names to give the columns of data (e.g., `col_names=c("col1", "col2")`).
 - Make sure to save your dataset to an `R` object using `<-`. You can name the data whatever you want, so long as you remember the name.
   
 ## Microsoft Excel Files
