@@ -9,13 +9,13 @@ library(learnr)
 library(tidyverse)
 library(here)
 library(knitr)
-opts_chunk$set(echo = TRUE)
+help_img <- png::readPNG(here("Basic_R_Programming","img","help_panel.png"))
 tutorial_options(exercise.timelimit = 10)
 ```
 
 ```{r echo=F, message=F} 
 # actual data read-in. Not showing in tutorial because don't want to confuse them with file path
-survey_data_2 <- read_csv(here('Basic_R_Programming','data','survey_data_2.csv'))
+survey_data <- read_csv(here('Basic_R_Programming','data','survey_data_2.csv'))
 ```
 
 ## **Introduction**
@@ -84,3 +84,206 @@ vector_1 + 1
 ```
   
 Because `R` is **vectorized**, this operation was performed on *each element* of `vector_1`. That means that we add 1 to the first value in `vector_1`, `1`, and then do so for the second value, `2`, and so on. 
+  
+Note that `vector_1` has not actually changed, because we didn't **assign** `vector_1 + 1` to an `R` object.
+```{r}
+vector_1
+```
+
+BUT, when we assign this to an object, `vector_2`, this is stored in our `R` workspace.
+  
+```{r}
+vector_2 <- vector_1 + 1
+```
+  
+Whenever you want to see the contents of an object in `R`, simply run the name of the object as a line of code. 
+
+```{r}
+vector_2
+```
+  
+### Exercise - Create a vector
+  
+Create a vector, called `vector_3`, which contains the numbers 1 through 10 (Hint, the `:` operator can be used to create a sequence of integers).
+  
+```{r vector, exercise=TRUE, exercise.lines=10}
+
+```
+  
+```{r vector-solution}
+vector_3 <- c(1,2,3,4,5,6,7,8,9,10)
+vector_3
+# OR an easier solution
+vector_3_easy <- 1:10
+vector_3_easy
+```
+
+## Using functions
+  
+**Functions** are incredibly useful tools in `R`. A **function** (also sometimes referred to as a **command**) is an object that performs an operation in `R`. That may sound vague, but that's because there are so many functions that do so many things!
+  
+One of the most simple functions is `print()`. `print()` simply **prints out the contents of an object to the console**. Printing is ubiquitous in programming.
+  
+```{r}
+x<-1
+print(x)
+```
+  
+`print()` is often unnecessary, because running the name of an object will print its contents.
+   
+```{r}
+x
+```
+  
+There are many, many other `R` functions. Let's demonstrate the use of them.
+  
+### An example 
+Let's take a particularly common function: `sum()`. `sum()` is used to add up all the values in a numeric vector. For example, let's go back to the first vector we created, `vector_1`. 
+  
+```{r}
+vector_1
+# Add up all the elements in vector_1
+sum(vector_1)
+``` 
+  
+
+### More about functions  
+There are so many functions built into `R`, and demonstrating all of them is beyond the scope of a single tutorial. It is also possible to create custom functions yourself (though this is also beyond the scope of this tutorial). But now, we should go through some brief terminology re: functions.
+  
+#### Function arguments  
+A function **argument** is the input you give to a function. For example, the function `sqrt()` (which computes the square root of a number), requires a single argument, `x`, which is the value to compute the square root of. This is an example of a **required** argument.
+  
+Functions also have **optional** arguments, which have default values. In other words, these arguments have particular values unless the user (i.e., **you**) tells . For example, `sum()` has the optional argument `na.rm`, which defines whether or not the function will remove `NA` values (`R`'s version of *missing data*). `na.rm` can take on the values `TRUE` or `FALSE`. 
+  
+Below, we create a vector, `y`, which contains numeric data along with an `NA` value. When we run `sum()`, it will return an `NA` value, because by default, `na.rm=FALSE`, meaning that `sum()` does NOT remove missing data.
+```{r}
+y <- c(1,2,3,4,5,NA)
+sum(y)
+```
+  
+If we specify that `na.rm=TRUE`, `sum()` will remove the `NA` value and we will add up all the elements in the vector.
+  
+```{r}
+sum(y,na.rm=TRUE)
+```
+  
+#### Getting help with a function
+  
+It's very common to need some help when using a function. That is, you may need info about what the function does, what arguments it takes etc. To view the **documentation** for a function (the info page explaining how the function works), simply run a line of code containing a `?` followed by the function name (or run `help(<function name>)`. RStudio will pull up the documentation in the bottom right panel.
+  
+```{r}
+?sum
+help(sum)
+``` 
+  
+```{r echo=F}
+grid::grid.raster(help_img)
+```
+  
+### Exercise - use the `abs()` function
+  
+```{r include=F}
+vec_x <- c(-1,-4,1,2,5,1)
+```
+   
+In the exercise box below, there is a vector, `vec_x`, pre-loaded. Examine the data, and then use the `abs()` function on `vec_x`. Then, see if you can figure out what `abs()` does, using the `?` operator (you may need to pull up RStudio for this).
+  
+```{r functions, exercise=TRUE}
+vec_x
+
+```
+```{r functions-solution}
+abs(vec_x)
+# abs() takes the absolute value of each element in a vector
+```
+
+There are many functions in `R`, both those built-in to `R` and those that come with packages we load. We will use more functions throughout this tutorial (and other tutorials). Do not hesitate to ask for help with a function if needed!
+  
+Now, we will use the principles we've discussed so far to learn about **dataframes**, a common way of storing data in `R`.
+  
+## Working with dataframes
+  
+The most common data stucture in `R` is the **dataframe**. A **dataframe** is a tabular data structure containing rows and columns. Each column typically has a name. Here is one example, an object that we will call `survey_data`.
+
+First, we will read in the data.^[If you haven't yet, please go through the **Reading in Data with `R`** slides.]
+  
+### First look at the data  
+```{r eval=F}
+survey_data <- read_csv("survey_data.csv")
+```
+```{r}
+survey_data
+```  
+  
+This dataframe consists of three columns, `age`, `pol_party` (political party), and `voted_2020` (whether or not the survey respondent voted in the 2020 election).^[Note that these data are simulated and are therefore fake.]
+  
+This dataframe is **tidy**, because each row represents a single observation (in our case, a single respondent in our survey).
+  
+### Indexing dataframes 
+  
+#### Base `R` index  
+We can **index**, or select, a column in the dataframe using the `$` symbol.
+  
+```{r}
+survey_data$age
+```
+  
+#### `dplyr` `select()` function  
+If we use the `dplyr` package (part of the tidyverse, a series of influential software packages with a common underlying philosophy), we can use the `select()` function to select a single column (or multiple columns).
+  
+```{r}
+library(dplyr)
+select(survey_data, age)
+select(survey_data, age, pol_party)
+```
+  
+### Numeric vs. character columns  
+The `pol_party` and `voted_2020` columns are different from the `age` column, because these are made up of **character** data - essentially, they can contain letters. Character data is great because not everything can be measured numerically, and alphabetical labels are often necessary. However, remember that you cannot perform numeric operations with this data. Attempting to do so will cause `R` to throw an error.
+  
+```{r error=TRUE}
+survey_data$pol_party * 2
+```
+
+### Creating new columns
+  
+Very often we need to **add** columns to our existing dataframe. We can do so fairly easily in `R`. 
+  
+#### Base `R` version  
+  
+We can also use `$` to **create** new columns in a dataframe. For example, say we wanted to convert our respondents' ages to months (by multiplying by 12). We can easily do so below.
+  
+```{r}
+survey_data$age_months <- survey_data$age * 12
+survey_data
+```
+  
+#### `dplyr` `mutate()` version  
+  
+We can also use `mutate()` a function from `dplyr`, to create a new column (just make sure to save the results to your `R` object). Note that we don't need to use `$` here, because we reference `survey_data` as the first function argument, `mutate()` knows to look in the `survey_data` dataframe for our `age` column. 
+  
+```{r}
+survey_data <- mutate(survey_data, age_months=age*12) 
+survey_data
+```
+  
+### Exercise - create a new column
+  
+Try creating a new column in survey_data, which contains the values in `age` minus 1. Call it `age_minus_1`. See if you can do so using base `R` and `mutate()`.
+  
+```{r new_column, exercise=TRUE, exercise.lines=10}
+survey_data
+```
+  
+```{r new_column-solution}
+# base R solution
+survey_data$age_minus_1 <- survey_date$age - 1
+# dplyr solution
+survey_data <- mutate(survey_data, age_minus_1=age-1)
+# new version of our object
+survey_data
+```  
+  
+## Conclusion 
+  
+You've now learned a bit about the basics of `R` programming. You will continue to build these skills in future tutorials, where you learn about using `R` to do basic statistical analysis.
+ 
