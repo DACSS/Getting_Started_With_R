@@ -1,0 +1,44 @@
+---
+title: "Module Introduction"
+author: "Sean Conway"
+date: "8/25/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+```
+  
+## Intro
+  
+Hello! This is a document explaining the order/format of the *Intro to `R`* module.  
+  
+This module was created to help users with little to no experience with `R`, statistics, or programming in general get a crash course in `R`.  
+The module is a collection of both slides and interactive tutorials. It is also intended to be used as a reference. No one is expected to learn everything in one go. Rather, use these as a starting point and refer to them as needed.
+  
+Below is a description of the module and its various sections. The sections are intended to be completed in order.
+  
+## The Module
+  
+### 1) Installing `R` & RStudio
+  
+First, we begin by installing `R` and `RStudio`. This section is a slideshow and can be found as *Installing_R_RStudio.pdf*.
+  
+### 2) Reading in Data with `R`
+  
+Next, we learn how to read in various data files with `R`. This may seem out of place, but  its necessary to learn how to import our data before we do anything with it. This section is a slideshow and can be found as *Reading_in_data.pdf*.
+  
+### 3) Intro to data
+  
+Next, we learn about data, both conceptually and practically, as an `R` user. This is an online, interactive tutorial. The link is <https://dacss.shinyapps.io/Intro_to_data/>.
+  
+### 4) Basic `R` Programming
+  
+Finally, we learn about basic `R` syntax and using `R` to work with dataframes and vectors. This is an online, interactive tutorial. The link is <https://dacss.shinyapps.io/Basic_R_Programming>.
+  
+## Wrapping up
+   
+After this, you should have learned about `R` and how to use it to work with data. For anyone taking **PS328**/**PS750**, you should next complete the regular **`R` tutorials** and the **Statistics Tutorials**, found on the Google Classroom.
+  
+  

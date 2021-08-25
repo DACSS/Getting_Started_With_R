@@ -9,7 +9,7 @@ library(learnr)
 library(tidyverse)
 library(here)
 library(knitr)
-help_img <- png::readPNG(here("Basic_R_Programming","img","help_panel.png"))
+help_img <- png::readPNG("help_panel.png")
 tutorial_options(exercise.timelimit = 10)
 ```
 

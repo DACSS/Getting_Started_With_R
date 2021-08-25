@@ -108,7 +108,7 @@ student_data
 ## A bit more about `read_csv()`
 - `read_csv()` is smart. By default, it assumes that the first row of the file contains our column names, so it automatically names our columns based on that row.
 - If by chance the data file does not have column names, you will need to specify `col_names=FALSE` when you run the code. Otherwise, `read_csv()` will name the columns based on the first row of data.
-- You can also use the `col_names` argument to provide a character vector of names to give the columns of data (e.g., `col_names=c("col1", "col2")`).
+- You can also use the `col_names` argument to provide a character vector of names to give the columns of data (e.g., `col_names=c("col1", "col2"7)`).
 - Make sure to save your dataset to an `R` object using `<-`. You can name the data whatever you want, so long as you remember the name.
   
 ## Microsoft Excel Files
@@ -122,7 +122,7 @@ student_data
 
 ## Microsoft Excel Files
 - Sometimes you may need to open the .xlsx/.xls file before reading it in, in order to see what you're working with. 
-- You don't need Microsoft Excel installed on your computer to open one of these files (most computers come with free software that can open them), but if you would like it installed, UMass does offer Microsoft 365 at no cost to students - see \textcolor{blue}{https://www.umass.edu/it/software/microsoft-office-365-education} for more info.
+- You don't need Microsoft Excel installed on your computer to open one of these files (most computers come with free software that can open them), but if you would like it installed, UMass does offer Microsoft 365 at no cost to students - see <https://www.umass.edu/it/software/microsoft-office-365-education> for more info.
 
 ## Reading in .xls/.xlsx
 - We can use the `read_excel()` function from the `readxl` package to read in our .xls or .xlsx file, specifying the file with the `path` argument.
